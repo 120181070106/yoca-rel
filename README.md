@@ -88,7 +88,7 @@ annotation_mode     = 2 #基本的集合已被划分于ImageSeg文件夹，现�
     fig.canvas.manager.set_window_title(window_title)#第241行
                 fig.canvas.manager.set_window_title('AP ' + class_name)#609行
 ```
-关系框部分
+关系框部分（照autodl调出的默认参数为1.5和0.1，但featurize上更为1.3和0.2）
 ```
 #---------------------------------(utils_bbox.py)---------------------------#
 # TORCH_1_10 = check_version():随即插入如下↓
