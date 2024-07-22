@@ -164,4 +164,30 @@ def 未框去误(未框,必框,误框号集):
 #-------------------------(yolo.py，用于显示)---------------------------#
         "model_path"        : 'model_data/b基础633.pth',
         "model_path"        : 'k.pth',#可再换成此自训的不高不低的权值，前权过精难提
+#-----------(visualize.ipynb，用于可视化基于现有必然框生成的先验框)-------------#
+import torch
+import matplotlib.pyplot as plt
+from utils.utils_bbox import 关框生成
+boxes = torch.tensor([[2.5,1.5,4,3],[4,5,5,6],[5,7,6,8]])
+# boxes = torch.tensor([[2.5,1.5,4,3],[4+2,5+2,5+2,6+2],[5,7,6,8]])
+# boxes = torch.tensor([[1,3,2,4],[3,1,4,2],[4,2,5,3]])
+# boxes = torch.tensor([[1-2,3-1,2-2,4-1],[3,1,4,2],[4,2,5,3]])
+# boxes=torch.tensor([[-5-5,-5-5,-3-5,-3-5],[3,9,5,11],[4,4,9,9]])
+# boxes=torch.tensor([[-5,-5,-3,-3],[3,9,5,11],[4,4,9,9]])
+# boxes=torch.tensor([[-5+5,-5+5,-3+5,-3+5],[3,9,5,11],[4,4,9,9]])
+# boxes=torch.tensor([[-5+7,-5+7,-3+7,-3+7],[3,9,5,11],[4,4,9,9]])
+# boxes=torch.tensor([[-5+8,-5+8,-3+8,-3+8],[3,9,5,11],[4,4,9,9]])
+# boxes=torch.tensor([[-5,-5,-3,-3],[3,9,5,11]])
+新框集 = 关框生成(boxes.float(),[])
+print(新框集)
+for box in boxes: # 绘制原框集
+    plt.plot([box[0], box[2], box[2], box[0], box[0]], [box[1], box[1], box[3], box[3], box[1]], 'b-', linewidth=3)
+for box in 新框集: # 绘制新框集
+    plt.plot([box[0], box[2], box[2], box[0], box[0]], [box[1], box[1], box[3], box[3], box[1]], 'r-', linewidth=1)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Boxes')
+plt.gca().set_aspect('equal', adjustable='box')
+plt.grid(True)
+plt.show()
 ```
